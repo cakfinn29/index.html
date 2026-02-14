@@ -45,7 +45,7 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      width: min(340px, 24vw);        /* ✅ bigger */
+      width: min(340px, 24vw);
       pointer-events: none;
       z-index: 0;
       opacity: 0.95;
@@ -61,24 +61,22 @@
     .deco-item{
       position: absolute;
       left: 20%;
-      font-size: 34px;               /* ✅ bigger emojis */
+      font-size: 34px;
       opacity: 0;
       animation: floatUp 8.5s linear infinite;
       filter: drop-shadow(0 10px 16px rgba(0,0,0,.18));
       will-change: transform, opacity;
     }
-
-    /* different sizes, positions, delays */
-    .deco-item:nth-child(1){ left: 18%; font-size: 38px; animation-duration: 9.0s; animation-delay: .2s; }
+    .deco-item:nth-child(1){ left: 18%; font-size: 38px; animation-duration: 9.0s;  animation-delay: .2s; }
     .deco-item:nth-child(2){ left: 52%; font-size: 32px; animation-duration: 10.5s; animation-delay: 1.0s; }
     .deco-item:nth-child(3){ left: 34%; font-size: 42px; animation-duration: 11.0s; animation-delay: 2.0s; }
-    .deco-item:nth-child(4){ left: 70%; font-size: 30px; animation-duration: 9.8s; animation-delay: 2.8s; }
+    .deco-item:nth-child(4){ left: 70%; font-size: 30px; animation-duration: 9.8s;  animation-delay: 2.8s; }
     .deco-item:nth-child(5){ left: 45%; font-size: 46px; animation-duration: 12.0s; animation-delay: 3.8s; }
     .deco-item:nth-child(6){ left: 62%; font-size: 36px; animation-duration: 10.2s; animation-delay: 4.6s; }
     .deco-item:nth-child(7){ left: 26%; font-size: 40px; animation-duration: 11.6s; animation-delay: 5.4s; }
     .deco-item:nth-child(8){ left: 78%; font-size: 34px; animation-duration: 9.4s;  animation-delay: 6.2s; }
     .deco-item:nth-child(9){ left: 40%; font-size: 44px; animation-duration: 12.8s; animation-delay: 7.0s; }
-    .deco-item:nth-child(10){ left: 58%; font-size: 33px; animation-duration: 10.9s; animation-delay: 7.8s; }
+    .deco-item:nth-child(10){left: 58%; font-size: 33px; animation-duration: 10.9s; animation-delay: 7.8s; }
 
     @keyframes floatUp{
       0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
@@ -104,39 +102,39 @@
       z-index: 2;
     }
 
-    /* ===== Title with “shadow grow behind text” + glow below ===== */
+    /* ===== Title (lowered) + clean shadow grow + glow below ===== */
     .title{
-      margin: 18px 0 10px;           /* ✅ lowered */
+      margin: 18px 0 10px;
       padding-top: 6px;
       font-family:'Great Vibes', cursive;
       font-weight:400;
       font-size: clamp(40px, 6vw, 58px);
-      text-shadow: 0 10px 26px rgba(0,0,0,.55);
+      text-shadow: 0 8px 18px rgba(0,0,0,.50);
       position: relative;
       display: inline-block;
       line-height: 1.1;
     }
 
-    /* soft shadow “grow” behind the text */
+    /* clearer “shadow grow behind text” (FIXED) */
     .title::before{
       content: attr(data-text);
       position:absolute;
       left: 0;
-      top: 0;
+      top: 6px;                         /* move down => looks like a shadow */
       width: 100%;
       z-index: -1;
-      color: rgba(255, 200, 220, 0.55);
+      color: rgba(255, 210, 230, 0.28); /* soft base */
       text-shadow:
-        0 14px 38px rgba(255,120,170,.35),
-        0 28px 70px rgba(255,120,170,.22),
-        0 42px 110px rgba(0,0,0,.22);
-      filter: blur(1.2px);
-      transform: scale(1.06);        /* ✅ makes it look like it “grows” behind */
-      opacity: 0.95;
+        0 10px 22px rgba(255,120,170,.35),
+        0 22px 50px rgba(255,120,170,.22),
+        0 34px 90px rgba(0,0,0,.18);
+      filter: blur(0.4px);              /* less blur => clearer */
+      transform: scale(1.08);           /* “grow” feel */
+      opacity: 1;
       pointer-events:none;
     }
 
-    /* glow light from below */
+    /* glow light from below title */
     .title::after{
       content:"";
       position:absolute;
@@ -212,7 +210,7 @@
 
     .hidden{ display:none; }
 
-    /* ===== Glow heart explosion ===== */
+    /* ===== Heart explosion layer ===== */
     .burst-layer{
       position:absolute;
       inset:0;
@@ -236,16 +234,14 @@
       100% { opacity:0; transform:translate(calc(-50% + var(--dx)), calc(-50% - 180px)) scale(1.35) rotate(var(--rot)); }
     }
 
-    /* ===== Message area (paragraph friendly) ===== */
+    /* ===== Message box (paragraph formatted) ===== */
     #loveText{
       margin: 14px auto 0;
       max-width: 72ch;
       line-height: 2.0;
       font-size: 15px;
-
-      text-align: left;              /* ✅ reads like a letter */
+      text-align: left;
       padding: 18px 18px;
-
       border-radius: 16px;
       background: rgba(0,0,0,.22);
       border: 1px solid rgba(255,255,255,.14);
@@ -257,7 +253,6 @@
     }
     #loveText.show{ opacity: 1; transform: translateY(0); }
 
-    /* Word spacing fix */
     .word{
       display:inline-block;
       margin-right:.22em;
@@ -268,7 +263,6 @@
     }
     .word.visible{ opacity:1; transform: translateY(0); filter: blur(0); }
 
-    /* small “letter” signature alignment */
     .signature{
       display:block;
       margin-top: 12px;
@@ -278,52 +272,34 @@
     }
 
     @media (max-width: 900px){
-      .side-deco{ width: min(240px, 28vw); }
+      .side-deco{ width: min(260px, 30vw); }
     }
     @media (max-width: 800px){
       .side-deco{ display:none; }
       .card{ transform: translateY(0); }
-      #loveText{ text-align: left; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Bigger side elements -->
+  <!-- Side elements -->
   <div class="side-deco left">
     <div class="deco-stack">
-      <div class="deco-item">💗</div>
-      <div class="deco-item">🌸</div>
-      <div class="deco-item">💖</div>
-      <div class="deco-item">✨</div>
-      <div class="deco-item">💘</div>
-      <div class="deco-item">💞</div>
-      <div class="deco-item">🌷</div>
-      <div class="deco-item">💕</div>
-      <div class="deco-item">✨</div>
-      <div class="deco-item">💝</div>
+      <div class="deco-item">💗</div><div class="deco-item">🌸</div><div class="deco-item">💖</div><div class="deco-item">✨</div><div class="deco-item">💘</div>
+      <div class="deco-item">💞</div><div class="deco-item">🌷</div><div class="deco-item">💕</div><div class="deco-item">✨</div><div class="deco-item">💝</div>
     </div>
   </div>
 
   <div class="side-deco right">
     <div class="deco-stack">
-      <div class="deco-item">💗</div>
-      <div class="deco-item">🌸</div>
-      <div class="deco-item">💖</div>
-      <div class="deco-item">✨</div>
-      <div class="deco-item">💘</div>
-      <div class="deco-item">💞</div>
-      <div class="deco-item">🌷</div>
-      <div class="deco-item">💕</div>
-      <div class="deco-item">✨</div>
-      <div class="deco-item">💝</div>
+      <div class="deco-item">💗</div><div class="deco-item">🌸</div><div class="deco-item">💖</div><div class="deco-item">✨</div><div class="deco-item">💘</div>
+      <div class="deco-item">💞</div><div class="deco-item">🌷</div><div class="deco-item">💕</div><div class="deco-item">✨</div><div class="deco-item">💝</div>
     </div>
   </div>
 
   <div class="card">
     <div class="burst-layer" id="burstLayer"></div>
 
-    <!-- data-text enables the “shadow grow” duplicate -->
     <div class="title" data-text="To My Love">To My Love 💗</div>
 
     <div class="sub">For <b>Inzali</b> — From <b>Canzy</b></div>
@@ -342,8 +318,8 @@
     <div id="loveText" class="hidden"></div>
   </div>
 
-  <!-- 🎵 Upload love.mp3 to repo root -->
-  <audio id="yesSong" src="love.mp3" preload="auto"></audio>
+  <!-- 🎵 Upload love.mp3 to the same folder as index.html -->
+  <audio id="loveSong" src="song.mp3.mp3" preload="auto"></audio>
 
   <script>
     const yesBtn = document.getElementById("yesBtn");
@@ -351,9 +327,9 @@
     const loveText = document.getElementById("loveText");
     const introText = document.getElementById("introText");
     const burstLayer = document.getElementById("burstLayer");
-    const yesSong = document.getElementById("yesSong");
+    const loveSong = document.getElementById("loveSong");
 
-    /* Early soft beep */
+    // small “early click” chime (optional)
     function playEarlyChime(){
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if(!AudioCtx) return;
@@ -361,17 +337,13 @@
       const ctx = new AudioCtx();
       const o = ctx.createOscillator();
       const g = ctx.createGain();
-
       o.type = "sine";
       o.frequency.value = 600;
       g.gain.value = 0.12;
-
       o.connect(g);
       g.connect(ctx.destination);
-
       o.start();
       o.stop(ctx.currentTime + 0.45);
-
       setTimeout(()=>{ try{ ctx.close(); }catch(e){} }, 700);
     }
 
@@ -396,12 +368,10 @@
       }
     }
 
-    /* Paragraph reveal: we build paragraphs and reveal word-by-word */
     function revealParagraphs(el, paragraphs, delayMs = 80){
       el.innerHTML = "";
-
-      // build: <p> with spans, and <br> spacing between paragraphs
       const allSpans = [];
+
       paragraphs.forEach((pText, idx) => {
         const p = document.createElement("div");
         p.style.marginBottom = (idx === paragraphs.length - 1) ? "0" : "14px";
@@ -418,13 +388,11 @@
         el.appendChild(p);
       });
 
-      // signature line
       const sig = document.createElement("span");
       sig.className = "signature";
       sig.textContent = "— Canzy ❤️";
       el.appendChild(sig);
 
-      // reveal all spans gradually
       let i = 0;
       const timer = setInterval(()=>{
         if(i >= allSpans.length){
@@ -437,15 +405,15 @@
     }
 
     yesBtn.addEventListener("click", ()=>{
+      // Play song ONLY after click (browser rule)
+      loveSong.currentTime = 0;
+      loveSong.volume = 0.75;
+      loveSong.play().catch(()=>{});
+
+      // optional chime too
       playEarlyChime();
 
-      // song
-      yesSong.currentTime = 0;
-      yesSong.volume = 0.7;
-      yesSong.play().catch(()=>{});
-
       glowHeartExplosion();
-
       introText.style.display = "none";
 
       loveText.classList.remove("hidden");
