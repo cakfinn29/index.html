@@ -35,18 +35,7 @@ body{
   overflow:hidden;
 }
 
-/* Cinematic overlay */
-.cinema-overlay{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .9s ease;
-  background:radial-gradient(1000px 600px at 50% 50%, transparent 55%, rgba(0,0,0,.35));
-}
-body.cinematic .cinema-overlay{opacity:1;}
-
-/* Card (moved LOWER) */
+/* Card — lowered slightly */
 .card{
   width:min(760px,100%);
   background:var(--card-bg);
@@ -56,12 +45,11 @@ body.cinematic .cinema-overlay{opacity:1;}
   padding:26px 20px;
   text-align:center;
   position:relative;
-  transform:translateY(10px); /* LOWERED */
+  transform:translateY(10px); /* LOWERED ONLY */
   transition:transform .9s ease;
 }
-body.cinematic .card{transform:translateY(10px) scale(1.03);}
 
-/* Title */
+/* Title — SAME STYLE but NO shadow-behind */
 .title{
   font-family:'Great Vibes',cursive;
   font-size:58px;
@@ -70,7 +58,7 @@ body.cinematic .card{transform:translateY(10px) scale(1.03);}
   position:relative;
 }
 
-/* Glow under title */
+/* Glow under title (kept) */
 .title::after{
   content:"";
   position:absolute;
@@ -98,7 +86,7 @@ button{
 
 .hidden{display:none;}
 
-/* Message box */
+/* Message */
 #loveText{
   margin:16px auto 0;
   max-width:72ch;
@@ -128,18 +116,7 @@ button{
   font-weight:800;
 }
 
-/* Hearts */
-.heart{
-  position:absolute;
-  opacity:0;
-  animation:explode 1.4s ease-out forwards;
-}
-@keyframes explode{
-  0%{opacity:1;transform:scale(.6);}
-  100%{opacity:0;transform:translateY(-180px) scale(1.3);}
-}
-
-/* Side floating hearts */
+/* Floating side elements (kept SAME) */
 .side{
   position:fixed;
   top:0;
@@ -149,6 +126,7 @@ button{
 }
 .side.left{left:0;}
 .side.right{right:0;}
+
 .float{
   position:absolute;
   animation:floatUp 10s linear infinite;
@@ -159,21 +137,31 @@ button{
   90%{opacity:1;}
   100%{transform:translateY(-10vh);opacity:0;}
 }
+
+/* Heart explosion */
+.heart{
+  position:absolute;
+  opacity:0;
+  animation:explode 1.4s ease-out forwards;
+}
+@keyframes explode{
+  0%{opacity:1;transform:scale(.6);}
+  100%{opacity:0;transform:translateY(-180px) scale(1.3);}
+}
 </style>
 </head>
 
 <body>
 
-<div class="cinema-overlay"></div>
-
+<!-- SIDE ELEMENTS (unchanged) -->
 <div class="side left">
-  <div class="float" style="left:40%;font-size:40px;">💗</div>
-  <div class="float" style="left:70%;font-size:34px;animation-delay:3s;">🌸</div>
+  <div class="float" style="left:40%;font-size:42px;">💗</div>
+  <div class="float" style="left:70%;font-size:36px;animation-delay:3s;">🌸</div>
 </div>
 
 <div class="side right">
-  <div class="float" style="left:40%;font-size:40px;">💗</div>
-  <div class="float" style="left:70%;font-size:34px;animation-delay:4s;">🌸</div>
+  <div class="float" style="left:40%;font-size:42px;">💗</div>
+  <div class="float" style="left:70%;font-size:36px;animation-delay:4s;">🌸</div>
 </div>
 
 <div class="card">
@@ -239,7 +227,6 @@ function reveal(paragraphs){
 }
 
 yesBtn.onclick=()=>{
- document.body.classList.add("cinematic");
  clickSound.play().catch(()=>{});
  loveSong.play().catch(()=>{});
  explodeHearts();
